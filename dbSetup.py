@@ -45,7 +45,7 @@ class Admins(Base):
 
 
 
-engine = create_engine('postgresql://database:<>@localhost/database')
+engine = create_engine('postgresql://database:<123>@localhost/database')
 
 Base.metadata.create_all(engine)
 

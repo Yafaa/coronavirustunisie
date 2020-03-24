@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+      
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+          background-color: white;
+      }
+
+      #map {
+        position:inherit;
+        height: 700px;
+        width: 80%;
+            margin-left:auto;margin-right:auto;
+      }
+        .number-table-main {
+    font-size: 24px;
+    font-weight: bold;
+}
+        .c1{
+            color: #555;
+            font-size: 40px;
+            margin:0;
+            font-weight: 300;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-align:center;
+        }
+        
+        .cases{
+            font-size: 54px;
+            font-weight: 700;
+            color: #696969;
+            text-align:center;
+        }
+        #d1{
+            background-color: #f5f5f5;
+            text-align: center;
+            color: #777;
+            font-size: 19px;
+            text-transform: uppercase;
+            line-height: 40px;
+            font-family: 'Roboto Condensed', sans-serif;
+            margin:0;
+        }
+        .panel-default {
+    border-color: #ddd;
+}
+        .panel-body {
+    padding: 15px;
+            
+}
+        .panel {
+            text-align: center;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+           
+           
+}
+        .panel-body {
+    padding: 15px;
+            
+}
+        .panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+}
+        .panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+        .panel-default>.panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+        * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+        .number-table {
+    font-size: 20px;
+    font-weight: bold;
+}
+        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+            width: 400px;
+            margin-left:auto;margin-right:auto;
+
+}
+        table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-color: grey;
+        position:relative;
+            margin-left:auto;margin-right:auto;
+            
+}
+        table.dataTable {
+    clear: both;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    max-width: none !important;
+    border-collapse: separate !important;
+}
+       
+        .table-bordered {
+    border: 1px solid #ddd;
+}
+        
+        
+        table.table-bordered.dataTable th, table.table-bordered.dataTable td {
+    border-left-width: 0;
+}
+        .main_table_countries_div {
+    font-size: 15.5px;
+    text-align: left;
+    overflow-x: unset !important;
+    overflow-y: unset !important;
+}
+        table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    position: relative;
+}
+        tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+        * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+        tbody tr :hover{
+            background-color: darkgray;
+        }
+        
+        #interactive-heading {
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern";
+    -webkit-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern=1";
+    font-size: 38px;
+    line-height: 46px;
+}
+        
+    </style>
+  </head>
+  <body>
+     <br>
+	<br>
+
+	<form action="" method="post">
+          <table id="main_table_countries_today" class="table table-bordered table-hover main_table_countries dataTable no-footer" style="width: 80%;margin-left:auto;margin-right:auto;" border="1">
+                    <thead>
+                        <tr role="row"><th width="100" class="sorting" tabindex="0" aria-controls="main_table_countries_today" rowspan="1" colspan="1" aria-label="Country,Other: activate to sort column ascending" style="width: 101px;">State</th><th width="20" class="sorting_desc" tabindex="0" aria-controls="main_table_countries_today" rowspan="1" colspan="1" aria-sort="descending" aria-label="TotalCases: activate to sort column ascending" style="width: 42px;">Total<br>Cases</th><th width="30" class="sorting" tabindex="0" aria-controls="main_table_countries_today" rowspan="1" colspan="1" aria-label="NewCases: activate to sort column ascending" style="width: 42px;">New<br>Cases</th><th width="30" class="sorting" tabindex="0" aria-controls="main_table_countries_today" rowspan="1" colspan="1" aria-label="TotalDeaths: activate to sort column ascending" style="width: 48px;">Total<br>Deaths</th><th width="30" class="sorting" tabindex="0" aria-controls="main_table_countries_today" rowspan="1" colspan="1" aria-label="NewDeaths: activate to sort column ascending" style="width: 48px;">New<br>Deaths</th><th width="30" class="sorting" tabindex="0" aria-controls="main_table_countries_today" rowspan="1" colspan="1" aria-label="TotalRecovered: activate to sort column ascending" style="width: 73px;">Total<br>Recovered</th><th width="30" class="sorting" tabindex="0" aria-controls="main_table_countries_today" rowspan="1" colspan="1" aria-label="ActiveCases: activate to sort column ascending" style="width: 43px;">Active<br>Cases</th>
+<th width="30" class="sorting" tabindex="0" aria-controls="main_table_countries_today" rowspan="1" colspan="1" aria-label="Serious,Critical: activate to sort column ascending" style="width: 56px;">Serious,<br>Critical</th>
+
+
+</tr>
+                    </thead>
+                    <tbody>
+                                                    
+                                                    
+                                       
+                     {% for ca in Cases %}
+        	     
+                       
+                             <tr style="" role="row" class="odd">
+                                <td style="font-weight: bold; font-size:15px; text-align:left;">  {{ca.state}}</td>
+                                <td style="font-weight: bold; text-align:right" class="sorting_1"><input  type="text" name="1{{ca.state}}" placeholder="" id="1{{ca.state}}" value =  {{ca.totalcases}} required ></td>
+				
+                                <td style="font-weight: bold; text-align:right;"><input  type="text" name="2{{ca.state}}" placeholder="" id="2{{ca.state}}" value =  {{ca.newcases}} required > </td>
+				
+                                
+
+
+                                <td style="font-weight: bold; text-align:right;"> <input  type="text" name="3{{ca.state}}" placeholder="" id="3{{ca.state}}" value =  {{ca.totaldeath}} required > </td>
+				
+
+				
+                                <td style="font-weight: bold; text-align:right; color:white"> <input  type="text" name="4{{ca.state}}" placeholder="" id="4{{ca.state}}" value =  {{ca.newdeath}} required > </td>
+				 
+
+
+
+                                <td style="font-weight: bold; text-align:right"> <input  type="text" name="5{{ca.state}}" placeholder=" id="5{{ca.state}}" value =  {{ca.totalrecovered}} required ></td>
+
+                                <td style="text-align:right;font-weight:bold;">{{ca.totalcases - ca.totalrecovered}}</td>
+                                <td style="font-weight: bold; text-align:right"> <input  type="text" name="6{{ca.state}}" placeholder="" id="6{{ca.state}}e" value =  {{ca.serious}} required > </td>
+				
+                                
+                            </tr>
+                        {% endfor %} 
+                                
+                               </tbody>
+                    
+                </table>
+      <button style="text-align:center;" type="submit" class="btn btn-primary" id="submit" type="submit"> submit </button>
+      </form>
+      
+    
+      
+  
+
+  </body>
+</html>

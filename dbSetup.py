@@ -37,7 +37,7 @@ class Admins(Base):
 
     username          = Column(String(25), primary_key = True)
     password        = Column(String(25), nullable = False)
-    totalviews =  Column(Integer)
+    
     
 	
    

@@ -35,15 +35,6 @@ loged = False
 
 ###############################################################################
 
-
-
-
-
-
-
-
-
-
 @app.route('/')
 def main():
     Casess = session.query(Cases).order_by(Cases.totalcases.desc())
@@ -57,7 +48,6 @@ def update():
     if request.method == 'POST' and loged == False :
     	pasw = request.form['password']
     	user = request.form['username']
-    	print(user,pasw)
     	adm = session.query(Admins).filter(Admins.username == user) 
     	res = adm.first()
     	if res and res.password == pasw : 
@@ -67,16 +57,14 @@ def update():
     	else :
     	    return render_template('password.html')
     elif request.method == 'POST' and loged == True :
-    	li = [ "Tunis", "Ariana" , "Béja", "Ben Arous", "Bizerte", "Gabés", "Gafsa", "Jendouba", "Kairouan", "Kasserine", "Kébili", "Le kef", "Mahdia", "La manouba", "Monastir", "Médenine", "Nabeul", "Sfax", "Sidi Bouzid", "Siliana", "Sousse", "Tataouine", "Tozeur", "Zaghouan", ]
+    	li = [ "Tunis", "Ariana" , u"Béja", "Ben Arous", "Bizerte", u"Gabés", "Gafsa", "Jendouba", "Kairouan", "Kasserine", u"Kébili", "Le kef", "Mahdia", "La manouba", "Monastir", u"Médenine", "Nabeul", "Sfax", "Sidi Bouzid", "Siliana", "Sousse", "Tataouine", "Tozeur", "Zaghouan"]
     	for i in li:
-    	    print(i)
     	    totalcases1 = request.form['1'+i]
     	    newcases1 = request.form['2'+i]
     	    totaldeath1 = request.form['3'+i]
     	    newdeath1 = request.form['4'+i]
     	    totalrecovered1 = request.form['5'+i]
     	    serious1 = request.form['6'+i]
-    	    print
     	    session.query(Cases).filter(Cases.state == i ).update({"totalcases" : totalcases1  , "newcases" : newcases1 , "totaldeath" : totaldeath1 , "newdeath" : newdeath1 , "totalrecovered" : totalrecovered1 , "serious" : serious1})
     	    session.commit()
     	    
@@ -87,21 +75,8 @@ def update():
 
 
     else :
-    	print("vide")
     	loged = False
     	return render_template('password.html')
-    
-
-
-
-
-
-
-
-
-
-
-
 
 ##########################################################
 
